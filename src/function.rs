@@ -1,13 +1,15 @@
 use rand::prelude::*;
-use apint::Int;
-use apint::ApInt;
+use num_bigint::BigInt;
 use primes::is_prime;// Need this for rng.gen_range(…) function to work.
-pub(crate) fn function(n: i32) -> Int {
+
+pub(crate) fn function(n: i32) -> BigInt {
     let mut rng = rand::thread_rng();
     loop {
-        let mut candidate:Int = Int::from(ApInt::from_i32(rng.gen_range(0, n)));
-        candidate.set_bit_at(0);
-        let mut i = candidate.resize_to_i64() as u64;
+        //let mut candidate:Int = Int::from(ApInt::from_i32(rng.gen_range(0, n)));
+        
+        let mut candidate = BigInt::from(rng.gen_range(0, n));
+        candidate.set_bit(0,true);
+        let mut i = candidate.to_string().parse::<u64>().unwrap();
         if is_prime(i){
             return candidate
         }
