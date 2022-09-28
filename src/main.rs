@@ -1,25 +1,43 @@
-use rand::prelude::*;
-use apint::Int;
-use apint::ApInt;
 use primes::is_prime;
 use std::vec::Vec;
+mod function;
 
 fn main() {
-    // let mut vec = Vec::new();
-    // vec.push(1);
-    // vec.push(2);
-    let mut rng = thread_rng();
-    // rng.gen is a generic function randomly generate True or False
-    // That's why sometimes the results are true, and sometimes false. 
-    if rng.gen() {
-        let x: f64 = rng.gen();
-        let y = rng.gen_range(-10.0, 10.0);
-        println!("x is: {}", x);
-        println!("y is: {}", y);
-        println!("Random Number between 0 and 9: {}", rng.gen_range(0, 10));
+    let vec= function::findprimelist(100);
+    let mut prefix:Vec<i32> = Vec::new();
+    let mut total = 0;
+    for (_ix, n) in vec.iter().enumerate() {
+        //println!("Prime {}: {}", ix, n);
+        total += n;
+        prefix.push(total);
     }
-    else{
-        println!("rng.gen() is false");
+    let mut small = 0;
+    let mut big ;
+    let mut maxlen = 0;
+    let mut maxbig= 0;
+    let mut maxsmall = 0;
+    let mut periodsum  ;
+    println!("prefix length is {}",prefix.len());
+    while small < prefix.len() - 1{
+        big = prefix.len() - 1;
+        while big > small{
+            periodsum = prefix[big] - prefix[small];
+            //println!("period sum is {}",periodsum);
+            if is_prime(periodsum as u64){
+                // println!("prime period sum is {}",periodsum);
+                if maxlen < big - small{
+                    maxlen = big - small;
+                    maxbig = big;
+                    maxsmall = small;
+                    println!("maxlength is {},{},{}",maxlen, big,small);
+                    println!("periodsum is {}",periodsum);
+                }
+            }
+            big -= 1;
+        }
+        small += 1;
     }
+    println!("maxlen is {}",maxlen);
+    println!("maxsmall , maxbig is {}, {}",maxsmall,maxbig);
     
 }
