@@ -5,9 +5,9 @@ use primes::is_prime;
 use std::vec::Vec;
 
 fn main() {
-    let mut vec = Vec::new();
-    vec.push(1);
-    vec.push(2);
+    // let mut vec = Vec::new();
+    // vec.push(1);
+    // vec.push(2);
     let mut rng = thread_rng();
     // rng.gen is a generic function randomly generate True or False
     // That's why sometimes the results are true, and sometimes false. 
