@@ -16,8 +16,8 @@ fn BagSize<T>(bag:&Bag<T>) -> usize{
 fn main() {
     let b1 = Bag {t: [1u8, 2u8, 3u8], };
     let b2 = Bag {t: [1u32, 2u32, 3u32], };
-    println!("size of b1 is {:?} bytes ",BagSize(&b1));
-    println!("size of b2 is {:?} bytes ",BagSize(&b2));
+    println!("size of First Bag is {:?} bytes ",BagSize(&b1));
+    println!("size of Second Bag is {:?} bytes ",BagSize(&b2));
 }
 
 
