@@ -1,16 +1,23 @@
+use std::mem;
+
 #[derive(Debug)]
 struct Bag<T> {
-    t: T,
+    t: [T; 3],
 }
 
-fn myFunction<T>(arg: T) { 
-
+fn BagSize<T>(bag:&Bag<T>) -> usize{
+    let mut size = 0;
+    for i in bag.t.iter(){
+        size += mem::size_of_val(i);
+    }
+    return size;
 }
-
 
 fn main() {
-    let b = Bag { t: 42 };
-    println!("b is{:?}",b);
+    let b1 = Bag {t: [1u8, 2u8, 3u8], };
+    let b2 = Bag {t: [1u32, 2u32, 3u32], };
+    println!("size of b1 is {:?} bytes ",BagSize(&b1));
+    println!("size of b2 is {:?} bytes ",BagSize(&b2));
 }
 
 
